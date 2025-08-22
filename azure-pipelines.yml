@@ -1,4 +1,5 @@
 trigger: none
+
 pool : omkarwipropool
 
 stages:
@@ -23,3 +24,12 @@ stages:
             command: 'custom'
             workingDir: '$(System.DefaultWorkingDirectory)'
             customCommand: 'run build'
+
+
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/build.zip'
+            replaceExistingArchive: true
