@@ -1,0 +1,26 @@
+trigger: none
+
+pool : omkarwipropool
+
+resources:
+ pipelines:
+   - pipeline: buildPipeline
+     source: build-pipeline
+     #pipeline trigger
+     trigger:
+      branches:
+       include:
+         - main
+stages:
+  - stage: manualApproval
+    pool: server
+    jobs:
+     - job : manual
+       steps:
+         - 
+- task: ManualValidation@1
+  inputs:
+    notifyUsers: 'omkarsingh9487@gmail.com'
+    approvers: 'omkarsingh9487@gmail.com'
+    onTimeout: 'resume'
+       
